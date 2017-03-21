@@ -119,16 +119,16 @@ export default class Demos extends Component {
 								<span>CityPicker</span>
 							</Link>
 						</li>
+						<li>
+							<Link to="/demo/datepicker">
+								<span><i className="iconfont icon-shijian"></i></span>
+								<span>DatePicker</span>
+							</Link>
+						</li>
 						<li className="disabled">
 							<a>
 								<span><i className="iconfont icon-youji"></i></span>
 								<span>Upload</span>
-							</a>
-						</li>
-						<li className="disabled">
-							<a>
-								<span><i className="iconfont icon-shijian"></i></span>
-								<span>DatePicker</span>
 							</a>
 						</li>
 						<li className="disabled">

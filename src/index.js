@@ -6,26 +6,7 @@ import {remLayout} from './util'
 
 import Home from './Home'
 import Demos from './Demos.jsx'
-import {
-	About,
-	Contact,
-	Tab,
-	Slide,
-	ToTop,
-	ActionSheet,
-	Dialog,
-	Animate,
-	Toast,
-	FullPage,
-	Gesture,
-	CountDown,
-	Switch,
-	Refresh,
-	InfiniteLoad,
-	Progress,
-	CityPicker,
-	FullPageX
-} from './components'
+import components from './components'
 
 import './index.styl'
 
@@ -41,7 +22,7 @@ class App extends React.Component {
 		let oldPath = this.props.location.pathname
 		if(newPath !== oldPath) {
 			this.setState({
-				slideName: newPath.length > oldPath.length ? 'swipeLeft' : 'swipeRight'
+				slideName: newPath.length >= oldPath.length ? 'swipeLeft' : 'swipeRight'
 			})
 		}
 	}
@@ -63,29 +44,31 @@ class App extends React.Component {
 	}
 }
 
+
 ReactDOM.render(
 	<Router history={hashHistory}>
 	  	<Route path="/" component={App}>
 		  	<IndexRoute component={Home} />
 		  	<Route path="demos" component={Demos} />
-		  	<Route path="about" component={About} />
-		  	<Route path="contact" component={Contact} />
-		  	<Route path="demo/tab" component={Tab} />
-		  	<Route path="demo/slide" component={Slide} />
-		  	<Route path="demo/totop" component={ToTop} />
-		  	<Route path="demo/actionsheet" component={ActionSheet} />
-		  	<Route path="demo/dialog" component={Dialog} />
-		  	<Route path="demo/animate" component={Animate} />
-		  	<Route path="demo/toast" component={Toast} />
-		  	<Route path="demo/fullpage" component={FullPage} />
-		  	<Route path="demo/fullpagex" component={FullPageX} />
-		  	<Route path="demo/gesture" component={Gesture} />
-		  	<Route path="demo/countdown" component={CountDown} />
-		  	<Route path="demo/switch" component={Switch} />
-		  	<Route path="demo/refresh" component={Refresh} />
-		  	<Route path="demo/infiniteload" component={InfiniteLoad} />
-		  	<Route path="demo/progress" component={Progress} />
-		  	<Route path="demo/citypicker" component={CityPicker} />
+		  	<Route path="about" component={components.About} />
+		  	<Route path="contact" component={components.Contact} />
+		  	<Route path="demo/tab" component={components.Tab} />
+		  	<Route path="demo/slide" component={components.Slide} />
+		  	<Route path="demo/totop" component={components.ToTop} />
+		  	<Route path="demo/actionsheet" component={components.ActionSheet} />
+		  	<Route path="demo/dialog" component={components.Dialog} />
+		  	<Route path="demo/animate" component={components.Animate} />
+		  	<Route path="demo/toast" component={components.Toast} />
+		  	<Route path="demo/fullpage" component={components.FullPage} />
+		  	<Route path="demo/fullpagex" component={components.FullPageX} />
+		  	<Route path="demo/gesture" component={components.Gesture} />
+		  	<Route path="demo/countdown" component={components.CountDown} />
+		  	<Route path="demo/switch" component={components.Switch} />
+		  	<Route path="demo/refresh" component={components.Refresh} />
+		  	<Route path="demo/infiniteload" component={components.InfiniteLoad} />
+		  	<Route path="demo/progress" component={components.Progress} />
+		  	<Route path="demo/citypicker" component={components.CityPicker} />
+		  	<Route path="demo/datepicker" component={components.DatePicker} />
 	  	</Route>
 	</Router>,
 	document.getElementById('app')

@@ -17,8 +17,9 @@ import InfiniteLoad from './InfiniteLoad'
 import Progress from './Progress'
 import CityPicker from './CityPicker'
 import FullPageX from './FullPageX'
+import DatePicker from './DatePicker'
 
-export {
+const components = {
 	Head,
 	About,
 	Contact,
@@ -37,5 +38,8 @@ export {
 	Refresh,
 	InfiniteLoad,
 	Progress,
-	CityPicker
+	CityPicker,
+	DatePicker
 }
+
+export default components

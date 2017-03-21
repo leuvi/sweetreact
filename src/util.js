@@ -26,3 +26,13 @@ export let getJSON = url => new Promise((resolve, reject) => {
 	xhr.responseType = 'json'
 	xhr.send()
 })
+
+export let timeFormat = (time, item = 'y-m-d') => {
+	time = time - 0 > 1e10 ? time : time * 1000
+	let t = new Date(time)
+	let tf = i => (i < 10 ? '0' : '') + i
+
+	return item.replace(/y|m|d/g, imatch => imatch === 'y' 
+		? tf(t.getFullYear()) : imatch === 'm' 
+		? tf(t.getMonth() + 1) : tf(t.getDate()))
+}
