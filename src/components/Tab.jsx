@@ -4,7 +4,7 @@ import Des from './Des'
 
 
 
-class TabBox extends Component {
+export class TabBox extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {

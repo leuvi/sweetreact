@@ -36,3 +36,22 @@ export let timeFormat = (time, item = 'y-m-d') => {
 		? tf(t.getFullYear()) : imatch === 'm' 
 		? tf(t.getMonth() + 1) : tf(t.getDate()))
 }
+
+export let time2md = time => {
+	const arr = time.split('-')
+	const month = parseInt(arr[1], 10)
+	const day = parseInt(arr[2], 10)
+
+	return `${month}月${day}日`
+}
+
+export let time2w = time => {
+	const arr = time.split('-')
+	const year = parseInt(arr[0], 10)
+	const month = parseInt(arr[1], 10)
+	const day = parseInt(arr[2], 10)
+
+	const weeks = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+
+	return weeks[new Date(year, month - 1, day).getDay()]
+}
