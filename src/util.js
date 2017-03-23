@@ -55,3 +55,10 @@ export let time2w = time => {
 
 	return weeks[new Date(year, month - 1, day).getDay()]
 }
+export let timeStamp = str => {
+	const arr = str.split('-')
+	const year = +arr[0]
+	const month = +arr[1]
+	const day = +arr[2]
+	return new Date(year, month - 1, day).getTime()
+}

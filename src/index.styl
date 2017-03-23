@@ -38,7 +38,7 @@ body
 /*common*/
 .btn
 	color #fff
-	background $baseColor
+	background $btnColor
 	padding .3rem .8rem
 	display inline-block
 	border-radius 5px
@@ -49,10 +49,17 @@ body
 	margin 0 15px 15px 0
 .line
 	height 20px
-
+.abtn
+	color #fff
+	background $btnColor
+	width 100%
+	line-height 40px
+	text-align center
+	border-radius 5px
+	font-size .7rem
 pre
 	margin 0
-	border-left 3px solid $baseColor
+	border-left 3px solid $btnColor-weight
 	box-shadow 3px 3px 0 #eee
 	line-height 2
 	padding 0 .5rem
@@ -914,7 +921,8 @@ $logoBase(rotate = 0, top = -2px)
 		.datecont
 			$1px-border(bottom)
 			height 1.7rem
-			display flex	
+			display flex
+			margin-bottom 15px
 			li
 				font-size .9rem
 				flex-grow 1
@@ -961,6 +969,17 @@ $logoBase(rotate = 0, top = -2px)
 			text-align center
 			&:nth-child(1),&:nth-child(7)
 				color $baseColor
+	.plytext
+		position fixed
+		bottom 20px
+		left 4rem
+		width 50%
+		line-height 36px
+		border-radius 5px
+		background-color rgba(0, 0, 0, .6)
+		color #fff
+		text-align center	
+		
 	.monthlist
 		height calc(100% - 30px)
 		margin-top 30px
@@ -993,7 +1012,10 @@ $logoBase(rotate = 0, top = -2px)
 						color $grayColor
 					&.on
 						color #fff
-						background $baseColor
+						background $btnColor
+					&.interval
+						background $btnColor-light
+						color #fff
 					em
 						font-size .5rem
 						margin-top 5px

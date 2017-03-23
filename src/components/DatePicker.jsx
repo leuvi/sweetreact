@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import Layout from './Layout'
 import SweetAnimate from './SweetAnimate'
-import {timeFormat, time2md, time2w} from '../util'
+import {timeFormat, time2md, time2w, timeStamp} from '../util'
 import {TabBox} from './Tab'
+import {ToastBox} from './Toast'
 
 
 export class DatePickerBox extends Component {
@@ -13,7 +14,8 @@ export class DatePickerBox extends Component {
 			show: false,
 			start: props.start,
 			end: props.end,
-			count: 0
+			count: 0,
+			intervals: []
 		}
 	}
 	componentWillReceiveProps(nextProps) {
@@ -36,12 +38,16 @@ export class DatePickerBox extends Component {
 		const div = this.state.show ? (<div className="datepicker">
 				<div className="datebar head">
 					<div className="back" onClick={this.back.bind(this)}><i className="iconfont icon-xitongfanhui"></i></div>
-					<h1>选择日期</h1>
+					<h1>{this.props.type === 1 ? '日历' : '去程返程日期'}</h1>
 				</div>
 				<ul className="weekbar">
 					<li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li>
 				</ul>
 				{this.createDom()}
+				{this.props.type === 2 ? this.state.count === 0 
+					? <div className="plytext">请选择去程日期</div> 
+					: <div className="plytext">请选择返程日期</div> 
+					: null}
 			</div>) : null
 		return (
 			<SweetAnimate
@@ -89,13 +95,22 @@ export class DatePickerBox extends Component {
 		const dayLi = [...Array(dayLength)].map((v, k) => {
 			const day = month + '-' + (k + 1)
 			const sday = day in specialDay ? <em>{specialDay[day]}</em> : null
-			const isStartDay = this.state.start === this.date2Str(year, month, k + 1)
+			const thisDate = this.date2Str(year, month, k + 1)
+			const isStartDay = this.state.start === thisDate
+			const isEndDay = this.props.type !== 1 
+							&& this.state.count === 0
+							&&  this.state.end === thisDate
+			const isInterval = this.props.type !== 1 
+							&& this.state.count === 0
+							&& this.state.intervals.some(value => value === thisDate)
 
 			if(year === this.year && month === this.month) {
 				const disabled = k + 1 < this.day
 				return <li 
 							key={k} 
-							className={disabled ? 'disabled' : isStartDay ? 'on' : null}
+							className={disabled ? 'disabled' : 
+										isStartDay || isEndDay ? 'on' : 
+										isInterval ? 'interval' : null}
 							onClick={!disabled ? this.selectDay.bind(this, {year, month, day: k + 1}) : null}
 						>
 							{this.props.now === this.date2Str(year, month, k + 1) ? <span>今天</span> : null}
@@ -107,7 +122,9 @@ export class DatePickerBox extends Component {
 				const disabled = k + 1 > this.day
 				return <li 
 							key={k} 
-							className={disabled ? 'disabled' : isStartDay ? 'on' : null}
+							className={disabled ? 'disabled' : 
+										isStartDay || isEndDay ? 'on' : 
+										isInterval ? 'interval' : null}
 							onClick={!disabled ? this.selectDay.bind(this, {year, month, day: k + 1}) : null}
 						>
 							{k+1}
@@ -116,7 +133,7 @@ export class DatePickerBox extends Component {
 			}
 			return <li 
 						key={k} 
-						className={isStartDay ? 'on' : null}
+						className={isStartDay || isEndDay ? 'on' : isInterval ? 'interval' : null}
 						onClick={this.selectDay.bind(this, {year, month, day: k + 1})}
 					>
 						{k+1}
@@ -141,40 +158,64 @@ export class DatePickerBox extends Component {
 		}
 	}
 	selectDay(date) {
-		console.log(this.state.count)
 		const {year, month, day} = date
+		const dateStr = this.date2Str(year, month, day)
 		
 		if(this.props.type === 1) {
 			this.setState({
-				start: this.date2Str(year, month, day)
+				start: dateStr,
+				end: dateStr,
+				intervals: []
 			}, () => {
 				this.close(this.props.callback.bind(this, {
-					start: this.date2Str(year, month, day),
-					end: this.props.end
+					start: dateStr,
+					end: this.state.start
 				}))
 			})
 		} else {
 			if(this.state.count === 0) {
 				this.setState({
-					start: this.date2Str(year, month, day),
+					start: dateStr,
 					count: this.state.count + 1
 				})
 			} else {
-				this.setState({
-					start: this.state.start,
-					end: this.date2Str(year, month, day),
-					count: 0
-				}, () => {
-					this.close(this.props.callback.bind(this, {
-						start: this.state.start,
-						end: this.date2Str(year, month, day)
-					}))
-				})
+				this.showInterval(this.state.start, dateStr)
 			}
 		}
-		
-		
-		
+	}
+	showInterval(start, end) {
+		if(timeStamp(end) < timeStamp(start)) {
+			this.setState({
+				start: end,
+				end: end,
+				count: 1,
+				intervals: []
+			})
+		} else {
+			this.setState({
+				start: start,
+				end: end,
+				count: 0
+			}, () => {
+				this.getIntervals(this.state.start, this.state.end)
+			})
+		}
+	}
+	getIntervals(start, end) {
+		const intervals = []
+		const spacing = timeStamp(end) - timeStamp(start)
+		let i = 1
+		while((spacing - i * 1000 * 60 * 60 * 24) > 0) {
+			intervals.push(timeFormat(timeStamp(start) + (i++) * 1000 * 60 * 60 * 24))
+		}
+		this.setState({
+			intervals
+		}, () => {
+			this.close(this.props.callback.bind(this, {
+				start: this.state.start,
+				end: this.state.end
+			}))
+		})
 	}
 	date2Str(year, month, day) {
 		const m = month > 9 ? month : '0' + month
@@ -207,6 +248,9 @@ export default class extends Component {
 				now: timeFormat(Date.now()),
 				start: timeFormat(Date.now()),
 				end: timeFormat(Date.now())
+			},
+			toast: {
+				show: false
 			}
 		}
 	}
@@ -215,22 +259,28 @@ export default class extends Component {
 		const props = Object.assign(datepicker, {
 			months: 12
 		})
-		const oneway = <ul className="datecont" onClick={this.onewayHandler.bind(this)}>
-			<li>
-				{time2md(datepicker.start)}
-				<span>{time2w(datepicker.start)}</span>
-			</li>
-		</ul>
-		const ply = <ul className="datecont" onClick={this.plyHandler.bind(this)}>
-			<li>
-				{time2md(datepicker.start)}
-				<span>{time2w(datepicker.start)}</span>
-			</li>
-			<li>
-				{time2md(datepicker.end)}
-				<span>{time2w(datepicker.end)}</span>
-			</li>
-		</ul>
+		const oneway = <div>
+			<ul className="datecont" onClick={this.onewayHandler.bind(this)}>
+				<li>
+					{time2md(datepicker.start)}
+					<span>{time2w(datepicker.start)}</span>
+				</li>
+			</ul>
+			<div className="abtn" onClick={this.disabledHandler.bind(this)}>开始搜索</div>
+		</div>
+		const ply = <div>
+			<ul className="datecont" onClick={this.plyHandler.bind(this)}>
+				<li>
+					{time2md(datepicker.start)}
+					<span>{time2w(datepicker.start)}</span>
+				</li>
+				<li>
+					{time2md(datepicker.end)}
+					<span>{time2w(datepicker.end)}</span>
+				</li>
+			</ul>
+			<div className="abtn" onClick={this.disabledHandler.bind(this)}>开始搜索</div>
+		</div>
 		const tab = {
 			title: ['单程', '往返'],
 			cont: [oneway, ply]
@@ -241,6 +291,7 @@ export default class extends Component {
 					<TabBox {...tab} />
 				</div>
 				<DatePickerBox {...props} callback={this.callback.bind(this)} />
+				<ToastBox {...this.state.toast} hidden={this.hiddenToast.bind(this)} />
 			</Layout>
 		)
 	}
@@ -267,12 +318,28 @@ export default class extends Component {
 		})
 	}
 	callback(date) {
-		console.log(date)
 		this.setState({
 			datepicker: {
 				show: false,
 				start: date.start,
 				end: date.end
+			}
+		})
+	}
+	disabledHandler() {
+		this.setState({
+			toast: {
+				show: true,
+				type: 3,
+				text: '暂时不可用',
+				time: 800
+			}
+		})
+	}
+	hiddenToast() {
+		this.setState({
+			toast: {
+				show: false
 			}
 		})
 	}

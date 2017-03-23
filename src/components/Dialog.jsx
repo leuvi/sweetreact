@@ -25,11 +25,6 @@ export class DialogBox extends Component {
 			})
 		}
     }
-    componentDidMount() {
-  //   	this.setState({
-		// 	show: true
-		// })
-    }
 	render() {
 		const {title, content, confirmText, cancleText, callback} = this.props
 		const div = this.state.show ? (
@@ -84,7 +79,7 @@ export class DialogBox extends Component {
 		})
 		this.props.hidden()
 		if(typeof fn === 'function') {
-        	setTimeout(fn, 500)
+        	setTimeout(fn, 300)
         }
 	}
 }
