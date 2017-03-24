@@ -23,6 +23,8 @@ class App extends React.Component {
 		if(newPath !== oldPath) {
 			this.setState({
 				slideName: newPath.length >= oldPath.length ? 'swipeLeft' : 'swipeRight'
+			}, () => {
+				window.scrollTo(0, 0)
 			})
 		}
 	}
@@ -69,6 +71,8 @@ ReactDOM.render(
 		  	<Route path="demo/progress" component={components.Progress} />
 		  	<Route path="demo/citypicker" component={components.CityPicker} />
 		  	<Route path="demo/datepicker" component={components.DatePicker} />
+		  	<Route path="demo/login" component={components.Login} />
+		  	<Route path="demo/regist" component={components.Regist} />
 	  	</Route>
 	</Router>,
 	document.getElementById('app')

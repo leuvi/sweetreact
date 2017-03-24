@@ -12,7 +12,7 @@ export default class Head extends Component {
 	}
 	render() {
 		return (
-			<div className="head">
+			<header className="head">
 				{(() => {
 					if(this.props.back) {
 						return (
@@ -33,7 +33,7 @@ export default class Head extends Component {
 						)
 					}
 				})()}
-			</div>
+			</header>
 		)
 	}
 	backHandler() {

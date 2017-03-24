@@ -18,6 +18,8 @@ import Progress from './Progress'
 import CityPicker from './CityPicker'
 import FullPageX from './FullPageX'
 import DatePicker from './DatePicker'
+import Login from './Login'
+import Regist from './Regist'
 
 const components = {
 	Head,
@@ -39,7 +41,9 @@ const components = {
 	InfiniteLoad,
 	Progress,
 	CityPicker,
-	DatePicker
+	DatePicker,
+	Login,
+	Regist
 }
 
 export default components

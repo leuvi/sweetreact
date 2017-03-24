@@ -1,21 +1,16 @@
 import React, { Component } from 'react'
 import Layout from './components/Layout'
 import {Link} from 'react-router'
+import Logo from './Logo'
 
 
-class App extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			year: new Date().getFullYear()
-		}
-	}
+export default class App extends Component {
 	render() {
 		return (
-			<Layout name="home" back={false}>
+			<Layout name="welcome.!" back={false}>
 				<div className="home">
 					<Logo />
-					<h2>SweetReact <span>Beta</span></h2>
+					<h2>Create By ReactJS & Stylus<span>Beta</span></h2>
 					<ul>
 						<li>
 							<Link to="/demos">
@@ -29,7 +24,7 @@ class App extends Component {
 							<Link to="/about">
 								<div>
 									<p>About</p>
-									<i className="iconfont icon-zhinengyouhua"></i>
+									<i className="iconfont rotateicon icon-zhinengyouhua"></i>
 								</div>
 							</Link>
 						</li>
@@ -42,21 +37,19 @@ class App extends Component {
 							</Link>
 						</li>
 					</ul>
-					<footer>©{this.state.year} 苹果熊</footer>
 				</div>
+				<footer>©{new Date().getFullYear()} 苹果熊</footer>
 			</Layout>
 		)
 	}
 }
 
-export default App
-
-function Logo() {
-	return (
-		<div className="logo">
-			<div className="border">
-				<span className="circle"><i className="iconfont icon-xiangqufill"></i></span>
-			</div>
-		</div>
-	)
-}
+// function Logo() {
+// 	return (
+// 		<div className="logo">
+// 			<div className="border">
+// 				<span className="circle"><i className="iconfont icon-xiangqufill"></i></span>
+// 			</div>
+// 		</div>
+// 	)
+// }

@@ -125,6 +125,18 @@ export default class Demos extends Component {
 								<span>DatePicker</span>
 							</Link>
 						</li>
+						<li>
+							<Link to="/demo/login">
+								<span><i className="iconfont icon-geren"></i></span>
+								<span>Login</span>
+							</Link>
+						</li>
+						<li>
+							<Link to="/demo/regist">
+								<span><i className="iconfont icon-dianping"></i></span>
+								<span>Regist</span>
+							</Link>
+						</li>
 						<li className="disabled">
 							<a>
 								<span><i className="iconfont icon-youji"></i></span>
@@ -135,18 +147,6 @@ export default class Demos extends Component {
 							<a>
 								<span><i className="iconfont icon-ziyouanpai"></i></span>
 								<span>Form</span>
-							</a>
-						</li>
-						<li className="disabled">
-							<a>
-								<span><i className="iconfont icon-geren"></i></span>
-								<span>Login</span>
-							</a>
-						</li>
-						<li className="disabled">
-							<a>
-								<span><i className="iconfont icon-dianping"></i></span>
-								<span>Regist</span>
 							</a>
 						</li>
 						<li className="disabled">

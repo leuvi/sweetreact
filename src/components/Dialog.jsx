@@ -79,7 +79,7 @@ export class DialogBox extends Component {
 		})
 		this.props.hidden()
 		if(typeof fn === 'function') {
-        	setTimeout(fn, 300)
+        	setTimeout(fn, 500)
         }
 	}
 }

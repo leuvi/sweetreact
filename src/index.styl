@@ -16,6 +16,7 @@ body
 	width 100%
 	min-height calc(100% - 44px)
 	padding-top 44px
+
 .swipeLeft-enter
 	transform translate3d(100%, 0, 0)
 .swipeLeft-enter.swipeLeft-enter-active
@@ -122,9 +123,20 @@ pre
 	.right
 		right 0
 		top 0
+footer
+		width 100%
+		text-align center
+		padding 40px 0 30px
+		color $grayColor
 
 
 /*logo*/
+.svglogo
+	padding 40px 0 30px
+	div
+		width 280px
+		height 80px
+		margin 0 auto
 $logoBase(rotate = 0, top = -2px)
 	width 100%
 	height 2rem
@@ -176,23 +188,19 @@ $logoBase(rotate = 0, top = -2px)
 .home
 	h2
 		text-align center
-		font-size .7rem
+		font-size .6rem
 		padding-top 15px
 		color $grayColor
-		font-family Baskerville-BoldItalic
+		font-family Baskerville-SemiBoldItalic
 		span
-			font-size .45rem
+			font-size .4rem
 			padding 0 3px
+			margin-left 5px
 			background $baseColor
 			border-radius 3px
 			color #fff
-			vertical-align baseline
+			vertical-align text-top
 			font-family GillSans-Light
-	footer
-		width 100%
-		text-align center
-		padding 30px 0 20px
-		color $grayColor
 	ul
 		padding 10px 15px 0
 		li
@@ -209,13 +217,22 @@ $logoBase(rotate = 0, top = -2px)
 				a
 					color #fff
 			div
-				padding 20px
+				padding 20px 15px 20px 20px
 				display flex
 				line-height 1.6rem
 				p
 					flex-grow 1
 				i
 					font-size 1.1rem
+					width 1.6rem
+					height @width
+					text-align center
+					&.rotateicon
+						animation rotateicon 8s linear infinite
+					
+@keyframes rotateicon
+	to
+		transform rotate(360deg)
 
 /*contact*/
 .contact
@@ -1012,10 +1029,10 @@ $logoBase(rotate = 0, top = -2px)
 						color $grayColor
 					&.on
 						color #fff
-						background $btnColor
+						background $baseColor
 					&.interval
-						background $btnColor-light
-						color #fff
+						background $baseColor-light
+						color #333
 					em
 						font-size .5rem
 						margin-top 5px
@@ -1023,3 +1040,49 @@ $logoBase(rotate = 0, top = -2px)
 						font-size .5rem
 						margin-bottom 5px
 			
+/*login*/
+$button()
+$clearinput()
+.login
+	.tips
+		margin-top 20px
+		color #999
+		text-align center
+	.frow
+		padding 20px 0 0
+	.lrp20
+		padding-left 15px
+		padding-right 15px
+	.row
+		display flex
+		border-bottom 1px solid #ededed
+		background-color #fff
+		height 1.6rem
+		padding 5px 0
+		line-height 1.6rem
+		label
+			flex-basis 5em
+			text-align center
+			border-right 1px solid #ededed
+			color #999
+		.labeldes
+			flex-basis 100px
+			text-align center
+			border-left 1px solid #ededed
+			color $baseColor
+			img
+				width 90px
+				height 1.6rem
+				display inline-block
+		.input
+			flex-grow 1
+			position relative
+			input
+				width 100%
+				border none
+				height .6rem
+				padding .5rem 0
+				text-indent 1em
+				color #666
+				vertical-align top
+				font-size .6rem

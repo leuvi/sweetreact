@@ -17,3 +17,29 @@ $1px-border(pos)
 	background-size 100% 1px
 	background-repeat no-repeat
 	background-position pos
+
+$clearinput()
+	.clearinput 
+		display none
+		position absolute
+		right 0
+		top 0
+		width 1.6rem
+		line-height @width
+		text-align center
+		outline none
+	input:valid + .clearinput
+		display block
+$button()
+	.button
+		width 100%
+		border 0
+		background $btnColor
+		color #fff
+		line-height 1.8rem
+		font-size .7rem
+		text-align center
+		border-radius 5px
+		&.disabled
+			background-color #ddd
+			color #aaa
