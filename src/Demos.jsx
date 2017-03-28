@@ -137,6 +137,12 @@ export default class Demos extends Component {
 								<span>Regist</span>
 							</Link>
 						</li>
+						<li>
+							<Link to="/demo/slider">
+								<span><i className="iconfont icon-zhongzhuan"></i></span>
+								<span>Slider</span>
+							</Link>
+						</li>
 						<li className="disabled">
 							<a>
 								<span><i className="iconfont icon-youji"></i></span>
@@ -147,12 +153,6 @@ export default class Demos extends Component {
 							<a>
 								<span><i className="iconfont icon-ziyouanpai"></i></span>
 								<span>Form</span>
-							</a>
-						</li>
-						<li className="disabled">
-							<a>
-								<span><i className="iconfont icon-zhongzhuan"></i></span>
-								<span>Slider</span>
 							</a>
 						</li>
 						<li className="disabled">

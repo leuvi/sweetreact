@@ -1086,3 +1086,48 @@ $clearinput()
 				color #666
 				vertical-align top
 				font-size .6rem
+
+/*slider*/
+.sliderdemo1
+	.sliderwrap
+		margin -25px auto 0
+	.imgslider
+		position relative
+		display inline-block
+		div
+			position absolute
+			left 0
+			top 0
+			bottom 0
+			width 100%
+			overflow hidden
+			img
+				position absolute
+				height 100%
+				filter sepia(.9)
+		img
+			display block
+.sliderwrap
+	margin 0 15px
+	height 28px
+	user-select none
+	.slider
+		position relative
+		height 2px
+		background-color #eee
+		.slidertrack
+			height 2px
+			background-color $baseColor
+			width 0
+		.sliderhandler
+			position absolute
+			left 0
+			top 50%
+			width 28px
+			height @width
+			margin-left -(@width/2)
+			margin-top -(@width/2)
+			border-radius 50%
+			background-color #fff
+			box-shadow 0 0 4px rgba(0, 0, 0, .4)
+			touch-action none

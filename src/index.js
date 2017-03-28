@@ -73,6 +73,7 @@ ReactDOM.render(
 		  	<Route path="demo/datepicker" component={components.DatePicker} />
 		  	<Route path="demo/login" component={components.Login} />
 		  	<Route path="demo/regist" component={components.Regist} />
+		  	<Route path="demo/slider" component={components.Slider} />
 	  	</Route>
 	</Router>,
 	document.getElementById('app')

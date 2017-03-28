@@ -20,6 +20,7 @@ import FullPageX from './FullPageX'
 import DatePicker from './DatePicker'
 import Login from './Login'
 import Regist from './Regist'
+import Slider from './Slider'
 
 const components = {
 	Head,
@@ -43,7 +44,8 @@ const components = {
 	CityPicker,
 	DatePicker,
 	Login,
-	Regist
+	Regist,
+	Slider
 }
 
 export default components
