@@ -74,6 +74,7 @@ ReactDOM.render(
 		  	<Route path="demo/login" component={components.Login} />
 		  	<Route path="demo/regist" component={components.Regist} />
 		  	<Route path="demo/slider" component={components.Slider} />
+		  	<Route path="demo/list" component={components.List} />
 	  	</Route>
 	</Router>,
 	document.getElementById('app')

@@ -58,7 +58,6 @@ export class SliderBox extends Component {
 		e.preventDefault()
 	}
 	render() {
-		console.log(1)
 		const trackStyle = {width: `${this.state.width}%`}
 		const handlerStyle = {left: `${this.state.left}%`}
 		return (

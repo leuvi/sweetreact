@@ -51,9 +51,9 @@ export let time2w = time => {
 	const month = parseInt(arr[1], 10)
 	const day = parseInt(arr[2], 10)
 
-	const weeks = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+	const weeks = ['日', '一', '二', '三', '四', '五', '六']
 
-	return weeks[new Date(year, month - 1, day).getDay()]
+	return '周' + weeks[new Date(year, month - 1, day).getDay()]
 }
 export let timeStamp = str => {
 	const arr = str.split('-')

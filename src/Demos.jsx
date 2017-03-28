@@ -143,6 +143,12 @@ export default class Demos extends Component {
 								<span>Slider</span>
 							</Link>
 						</li>
+						<li>
+							<Link to="/demo/list">
+								<span><i className="iconfont icon-listview"></i></span>
+								<span>ListView</span>
+							</Link>
+						</li>
 						<li className="disabled">
 							<a>
 								<span><i className="iconfont icon-youji"></i></span>

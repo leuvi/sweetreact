@@ -21,6 +21,7 @@ import DatePicker from './DatePicker'
 import Login from './Login'
 import Regist from './Regist'
 import Slider from './Slider'
+import List from './List'
 
 const components = {
 	Head,
@@ -45,7 +46,8 @@ const components = {
 	DatePicker,
 	Login,
 	Regist,
-	Slider
+	Slider,
+	List
 }
 
 export default components

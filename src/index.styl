@@ -1131,3 +1131,56 @@ $clearinput()
 			background-color #fff
 			box-shadow 0 0 4px rgba(0, 0, 0, .4)
 			touch-action none
+
+/*listview*/
+.listdemo
+	line-height 2.8rem
+	padding-left 20px
+.listview-outer
+	width 100%
+	height calc(100vh - 44px)
+	position relative
+	overflow hidden
+	.listview-inner
+		height 100%
+		overflow auto
+		overflow-scrolling touch
+		-webkit-overflow-scrolling touch
+		&::-webkit-scrollbar
+			display none
+			width 0
+		.listview-more
+			height 50px
+			$center()
+		.listview
+			background-color #fff
+			li
+				position relative
+				overflow hidden
+				height 3rem
+				border-bottom 1px solid $borderColor
+				box-sizing border-box
+				.content
+					width 100%
+					height 100%
+					background-color #fff
+					position absolute
+					z-index 10
+					transition transform .2s
+					&.current
+						transform translate3d(-3rem, 0, 0)		
+					&:active
+						background-color $borderColor
+				.action
+					position absolute
+					z-index 1
+					right 0
+					top 0
+					bottom 0
+					background-color #f30
+					width 3rem
+					height 100%
+					$center()
+					color #fff
+					.iconfont
+						font-size 1rem
