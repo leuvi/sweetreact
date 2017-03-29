@@ -3,6 +3,23 @@
 @import './assets/icons/iconfont.css'
 @import './assets/animate.css'
 
+
+.isloading
+	position fixed
+	left 0
+	top 0
+	bottom 0
+	z-index 1000
+	width 100%
+	height 100%
+	display flex
+	justify-content center
+	align-items center
+	flex-direction column
+	p
+		padding-top 25px
+		color #bbb
+
 /*body*/
 body
 	background-color #f6f6f6
@@ -1184,3 +1201,139 @@ $clearinput()
 					color #fff
 					.iconfont
 						font-size 1rem
+						
+/*upload*/
+.uploaddemo
+	h3
+		font-size .8rem
+		line-height 2rem
+		border-top 1px solid $borderColor
+	ul
+		width 100%
+		display flex
+		flex-wrap wrap
+		li
+			width 4.5rem
+			height @width
+			position relative
+			margin-right .5rem
+			margin-bottom @margin-right
+			background-color #ccc
+			&:nth-child(3n)
+				margin-right 0
+			img
+				width 100%
+				height @width
+				object-fit cover
+.upload
+	position absolute
+	left 0
+	top 0
+	width 100%
+	height 100%
+	z-index 100
+	padding-top 44px
+	box-sizing border-box
+	background-color #f6f6f6
+	.inner
+		padding 15px 10px 0
+		background-color #fff
+	textarea
+		width 100%
+		min-height 100px
+		border 0
+		resize none
+		box-sizing border-box
+		margin-bottom 10px
+		font-size .6rem
+	.uploadbar
+		position absolute
+		left 0
+		top 0
+		width 100%
+		height 44px
+		line-height 44px
+		text-align center
+		color #fff
+		background $baseColor
+		.disabled
+			color rgba(255, 255, 255, .5)
+	.pics
+		width 100%
+		ul
+			width 100%
+			display flex
+			flex-wrap wrap
+			li
+				width 3.5rem
+				height @width
+				position relative
+				margin-right .33rem
+				margin-bottom @margin-right
+				background-color #ccc
+				&:nth-child(4n)
+					margin-right 0
+				.img
+					width 100%
+					height 100%
+					overflow hidden
+				img
+					width 100%
+					height @width
+					object-fit cover
+				.del
+					position absolute
+					right -7px
+					top -7px
+					width 20px
+					height 20px
+					text-align center
+					border-radius 50%
+					color #fff
+					background-color $baseColor
+					.iconfont
+						font-size 12px
+				input
+					width 100%
+					height 100%
+					opacity 0
+				label
+					position absolute
+					width 100%
+					height 100%
+					box-sizing border-box
+					border 2px solid #eee
+					background-color #fff
+					&:before
+						content ''
+						position absolute
+						left 49%
+						top 30%
+						width 3px
+						height 45%
+						background #ddd
+					&:after
+						content ''
+						position absolute
+						left 28%
+						top 50%
+						width 45%
+						height 3px
+						background #ddd
+
+@media only screen and (max-width: 414px)
+	.upload .pics ul li
+		margin-right .4rem
+		margin-bottom @margin-right
+@media only screen and (max-width: 375px)
+	.upload .pics ul li
+		margin-right .38rem
+		margin-bottom @margin-right
+@media only screen and (max-width: 360px)
+	.upload .pics ul li
+		margin-right .37rem
+		margin-bottom @margin-right
+@media only screen and (max-width: 320px)
+	.upload .pics ul li
+		margin-right .33rem
+		margin-bottom @margin-right

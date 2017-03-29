@@ -22,8 +22,9 @@ import Login from './Login'
 import Regist from './Regist'
 import Slider from './Slider'
 import List from './List'
+import Upload from './Upload'
 
-const components = {
+export default {
 	Head,
 	About,
 	Contact,
@@ -47,7 +48,6 @@ const components = {
 	Login,
 	Regist,
 	Slider,
-	List
+	List,
+	Upload
 }
-
-export default components

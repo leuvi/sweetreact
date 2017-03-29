@@ -149,11 +149,11 @@ export default class Demos extends Component {
 								<span>ListView</span>
 							</Link>
 						</li>
-						<li className="disabled">
-							<a>
+						<li>
+							<Link to="/demo/upload">
 								<span><i className="iconfont icon-youji"></i></span>
 								<span>Upload</span>
-							</a>
+							</Link>
 						</li>
 						<li className="disabled">
 							<a>

@@ -31,6 +31,10 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="app">
+				<div className="isloading" style={{display: 'none'}} onTouchMove={e => e.preventDefault()}>
+			    	<div className="loading"></div>
+			    	<p>正在加载</p>
+			    </div>
 				<ReactCSSTransitionGroup
 			      component="div"
 			      transitionName={this.state.slideName}
@@ -45,38 +49,39 @@ class App extends React.Component {
 		)
 	}
 }
-
+const routes = (
+	<Route path="/" component={App}>
+	  	<IndexRoute component={Home} />
+	  	<Route path="demos" component={Demos} />
+	  	<Route path="about" component={components.About} />
+	  	<Route path="contact" component={components.Contact} />
+	  	<Route path="demo/tab" component={components.Tab} />
+	  	<Route path="demo/slide" component={components.Slide} />
+	  	<Route path="demo/totop" component={components.ToTop} />
+	  	<Route path="demo/actionsheet" component={components.ActionSheet} />
+	  	<Route path="demo/dialog" component={components.Dialog} />
+	  	<Route path="demo/animate" component={components.Animate} />
+	  	<Route path="demo/toast" component={components.Toast} />
+	  	<Route path="demo/fullpage" component={components.FullPage} />
+	  	<Route path="demo/fullpagex" component={components.FullPageX} />
+	  	<Route path="demo/gesture" component={components.Gesture} />
+	  	<Route path="demo/countdown" component={components.CountDown} />
+	  	<Route path="demo/switch" component={components.Switch} />
+	  	<Route path="demo/refresh" component={components.Refresh} />
+	  	<Route path="demo/infiniteload" component={components.InfiniteLoad} />
+	  	<Route path="demo/progress" component={components.Progress} />
+	  	<Route path="demo/citypicker" component={components.CityPicker} />
+	  	<Route path="demo/datepicker" component={components.DatePicker} />
+	  	<Route path="demo/login" component={components.Login} />
+	  	<Route path="demo/regist" component={components.Regist} />
+	  	<Route path="demo/slider" component={components.Slider} />
+	  	<Route path="demo/list" component={components.List} />
+	  	<Route path="demo/upload" component={components.Upload} />
+  	</Route>
+)
 
 ReactDOM.render(
-	<Router history={hashHistory}>
-	  	<Route path="/" component={App}>
-		  	<IndexRoute component={Home} />
-		  	<Route path="demos" component={Demos} />
-		  	<Route path="about" component={components.About} />
-		  	<Route path="contact" component={components.Contact} />
-		  	<Route path="demo/tab" component={components.Tab} />
-		  	<Route path="demo/slide" component={components.Slide} />
-		  	<Route path="demo/totop" component={components.ToTop} />
-		  	<Route path="demo/actionsheet" component={components.ActionSheet} />
-		  	<Route path="demo/dialog" component={components.Dialog} />
-		  	<Route path="demo/animate" component={components.Animate} />
-		  	<Route path="demo/toast" component={components.Toast} />
-		  	<Route path="demo/fullpage" component={components.FullPage} />
-		  	<Route path="demo/fullpagex" component={components.FullPageX} />
-		  	<Route path="demo/gesture" component={components.Gesture} />
-		  	<Route path="demo/countdown" component={components.CountDown} />
-		  	<Route path="demo/switch" component={components.Switch} />
-		  	<Route path="demo/refresh" component={components.Refresh} />
-		  	<Route path="demo/infiniteload" component={components.InfiniteLoad} />
-		  	<Route path="demo/progress" component={components.Progress} />
-		  	<Route path="demo/citypicker" component={components.CityPicker} />
-		  	<Route path="demo/datepicker" component={components.DatePicker} />
-		  	<Route path="demo/login" component={components.Login} />
-		  	<Route path="demo/regist" component={components.Regist} />
-		  	<Route path="demo/slider" component={components.Slider} />
-		  	<Route path="demo/list" component={components.List} />
-	  	</Route>
-	</Router>,
+	<Router history={hashHistory} routes={routes} />,
 	document.getElementById('app')
 )
 remLayout()
