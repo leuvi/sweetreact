@@ -20,6 +20,23 @@
 		padding-top 25px
 		color #bbb
 
+/*errorpage*/
+.errorpage
+	padding 3rem 5rem
+	.e404
+		height 2rem
+		$center()
+		font-size 1.6rem
+		color #999
+		border 10px solid transparent
+		border-radius 50px
+		background linear-gradient(white, white) padding-box,
+					repeating-linear-gradient(-45deg, $baseColor 0, $baseColor 12.5%, transparent 0, transparent 25%, $btnColor 0, $btnColor 37.5%, transparent 0, transparent 50%) 0 0 / 30rem 30rem
+		animation ant 12s linear infinite alternate
+@keyframes ant
+	to
+		background-position 100%
+
 /*body*/
 body
 	background-color #f6f6f6

@@ -4,7 +4,82 @@ import Des from './Des'
 import Code from './Code'
 import SweetAnimate from './SweetAnimate'
 
-
+export default class Dialog extends Component {
+	static contextTypes = {
+	    router: PropTypes.object,
+	}
+	constructor(props) {
+		super(props)
+		this.state = {
+			dialog: {
+				show: false
+			}
+		}
+	}
+	render() {
+const codes1 = `this.setState({
+	dialog: {
+		title: '我是标题',
+		content: '我是内容',
+		confirmText: 'ok' //可选
+	}
+})`
+const codes2 = `this.setState({
+	dialog: {
+	    	title: 'hola',
+	    	content: 'back to home?',
+	    	confirmText: 'yes', //可选
+	    	cancleText: 'no', //可选
+	    	callback() {router.push('/')}
+	}
+})`
+		return (
+			<Layout name="Dialog">
+				<Des info="<DialogBox {...this.state.dialog} />" />
+				<div className="dialogdemo">
+					<div className="btn" onClick={this.showDialog1.bind(this)}>普通对话框</div>
+					<Code codes={codes1} />
+					<div className="line"></div>
+					<div className="btn" onClick={this.showDialog2.bind(this)}>回调对话框</div>
+					<Code codes={codes2} />
+					<DialogBox {...this.state.dialog} hidden={this.hidden.bind(this)} />
+				</div>
+			</Layout>
+		)
+	}
+	showDialog1() {
+	    this.setState({
+	    	dialog: {
+	    		show: true,
+		    	title: 'hi!',
+		    	content: 'I\'m SweetReact.',
+		    	confirmText: 'ok'
+		    }
+	    })
+	}
+	showDialog2() {
+		const router = this.context.router
+	    this.setState({
+	    	dialog: {
+	    		show: true,
+		    	title: 'hola',
+		    	content: 'back to home?',
+		    	confirmText: 'yes',
+		    	cancleText: 'no',
+		    	callback() {
+		    		router.push('/')
+		    	}
+		    }
+	    })
+	}
+	hidden() {
+		this.setState({
+			dialog: {
+				show: false
+			}
+		})
+	}
+}
 
 export class DialogBox extends Component {
 	static propTypes = {
@@ -81,82 +156,5 @@ export class DialogBox extends Component {
 		if(typeof fn === 'function') {
         	setTimeout(fn, 500)
         }
-	}
-}
-
-export default class extends Component {
-	static contextTypes = {
-	    router: PropTypes.object,
-	}
-	constructor(props) {
-		super(props)
-		this.state = {
-			dialog: {
-				show: false
-			}
-		}
-	}
-	render() {
-const codes1 = `this.setState({
-	dialog: {
-		title: '我是标题',
-		content: '我是内容',
-		confirmText: 'ok' //可选
-	}
-})`
-const codes2 = `this.setState({
-	dialog: {
-	    	title: 'hola',
-	    	content: 'back to home?',
-	    	confirmText: 'yes', //可选
-	    	cancleText: 'no', //可选
-	    	callback() {router.push('/')}
-	}
-})`
-		return (
-			<Layout name="Dialog">
-				<Des info="<DialogBox {...this.state.dialog} />" />
-				<div className="dialogdemo">
-					<div className="btn" onClick={this.showDialog1.bind(this)}>普通对话框</div>
-					<Code codes={codes1} />
-					<div className="line"></div>
-					<div className="btn" onClick={this.showDialog2.bind(this)}>回调对话框</div>
-					<Code codes={codes2} />
-					<DialogBox {...this.state.dialog} hidden={this.hidden.bind(this)} />
-				</div>
-			</Layout>
-		)
-	}
-	showDialog1() {
-	    this.setState({
-	    	dialog: {
-	    		show: true,
-		    	title: 'hi!',
-		    	content: 'I\'m SweetReact.',
-		    	confirmText: 'ok'
-		    }
-	    })
-	}
-	showDialog2() {
-		const router = this.context.router
-	    this.setState({
-	    	dialog: {
-	    		show: true,
-		    	title: 'hola',
-		    	content: 'back to home?',
-		    	confirmText: 'yes',
-		    	cancleText: 'no',
-		    	callback() {
-		    		router.push('/')
-		    	}
-		    }
-	    })
-	}
-	hidden() {
-		this.setState({
-			dialog: {
-				show: false
-			}
-		})
 	}
 }

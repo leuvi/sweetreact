@@ -156,10 +156,10 @@ export default class Demos extends Component {
 							</Link>
 						</li>
 						<li className="disabled">
-							<a>
+							<Link to="/demo/form">
 								<span><i className="iconfont icon-ziyouanpai"></i></span>
 								<span>Form</span>
-							</a>
+							</Link>
 						</li>
 						<li className="disabled">
 							<a>
