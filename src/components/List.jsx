@@ -1,10 +1,13 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import Layout from './Layout'
 import ListView from './ListView'
 import {getJSON} from '../util'
 
 
 export default class List extends Component {
+	static contextTypes = {
+	    router: PropTypes.object,
+	}
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -15,11 +18,9 @@ export default class List extends Component {
 	componentDidMount() {
 		const api = `http://www.sweetui.com/demo/api/dataset.php?start=${this.state.page}&count=15`
 		getJSON(api).then(data => {
-			this.timer = setTimeout(() => {
-				this.setState({
-					dataSource: this.state.dataSource.concat(data)
-				})
-			}, 500)
+			this.setState({
+				dataSource: this.state.dataSource.concat(data)
+			})
 		})
 	}
 	componentWillUnmount() {
@@ -30,7 +31,7 @@ export default class List extends Component {
 			<Layout name="ListView">
 				<ListView
 					dataSource={this.state.dataSource}
-					renderRow={rowData => <div className="listdemo"><h2>{rowData}</h2></div>}
+					renderRow={rowData => <div className="listdemo" onClick={this.routerTo.bind(this, rowData)}><h2>{rowData}</h2></div>}
 					onEndReached={this.getData.bind(this)}
 					showGesture={true}
 					actionCallback={this.getCallback.bind(this)}
@@ -38,9 +39,11 @@ export default class List extends Component {
 			</Layout>
 		)
 	}
+	routerTo(id) {
+		this.context.router.push(`/demo/list/${id.replace(/\D/g, '')}`)
+	}
 	getCallback(key) {
 		this.state.dataSource.splice(key, 1)
-		console.log(this.state.page)
 	}
 	getData() {
 		this.setState({

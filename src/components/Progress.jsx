@@ -68,7 +68,7 @@ export default class extends Component {
 				width: 40,
 				stroke: 4,
 				innerColor: '#eee',
-				outerColor: '#00d8ff',
+				outerColor: '#FF5734',
 				percent: 0
 			},
 			demo5: {
@@ -76,7 +76,7 @@ export default class extends Component {
 				width: 50,
 				stroke: 5,
 				innerColor: '#eee',
-				outerColor: '#00d8ff',
+				outerColor: '#FF5734',
 				percent: 0
 			},
 			demo6: {
@@ -84,7 +84,7 @@ export default class extends Component {
 				width: 60,
 				stroke: 6,
 				innerColor: '#eee',
-				outerColor: '#00d8ff',
+				outerColor: '#FF5734',
 				percent: 1
 			},
 		}

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import Layout from './Layout'
 import SweetAnimate from './SweetAnimate'
+import {TabBox} from './Tab'
+import {ToastBox} from './Toast'
 import citydata from '../plugins/citydata'
 
 export class CityPickerBox extends Component {
@@ -153,7 +155,10 @@ export default class extends Component {
 			show1: false,
 			show2: false,
 			demo1: '选择起飞城市',
-			demo2: '选择降落城市'
+			demo2: '选择降落城市',
+			toast: {
+				show: false
+			}
 		}
 	}
 	render() {
@@ -167,14 +172,32 @@ export default class extends Component {
 			show: this.state.show2,
 			callback: this.callback2.bind(this)
 		}
+		const oneway = <div>
+			<ul className="citycont">
+				<li onClick={this.click1.bind(this)}>
+					<span>出发城市</span>
+					<p>{this.state.demo1}</p>
+				</li>
+				<li><i className="iconfont icon-feiji"></i></li>
+				<li onClick={this.click2.bind(this)}>
+					<span>降落城市</span>
+					<p>{this.state.demo2}</p>
+				</li>
+			</ul>
+			<div className="abtn" onClick={this.disabledHandler.bind(this)}>查询</div>
+		</div>
+		const tab = {
+			title: ['单程', '往返'],
+			cont: [oneway, oneway]
+		}
 		return (
 			<Layout name="CityPicker">
-				<div className="demoarea">
-					<div className="btn" onClick={this.click1.bind(this)}>{this.state.demo1}</div>
+					<div className="citydemo">
+						<TabBox {...tab} />
+					</div>
 					<CityPickerBox {...cityprops1} />
-					<div className="btn" onClick={this.click2.bind(this)}>{this.state.demo2}</div>
 					<CityPickerBox {...cityprops2} />
-				</div>
+					<ToastBox {...this.state.toast} hidden={this.hiddenToast.bind(this)} />
 			</Layout>
 		)
 	}
@@ -198,6 +221,23 @@ export default class extends Component {
 		this.setState({
 			show2: false,
 			demo2: c ? c : this.state.demo2
+		})
+	}
+	disabledHandler() {
+		this.setState({
+			toast: {
+				show: true,
+				type: 3,
+				text: '暂时不可用',
+				time: 800
+			}
+		})
+	}
+	hiddenToast() {
+		this.setState({
+			toast: {
+				show: false
+			}
 		})
 	}
 }

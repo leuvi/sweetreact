@@ -76,6 +76,7 @@ const routes = (
 	  	<Route path="demo/regist" component={components.Regist} />
 	  	<Route path="demo/slider" component={components.Slider} />
 	  	<Route path="demo/list" component={components.List} />
+	  	<Route path="demo/list/:id" component={components.Content} />
 	  	<Route path="demo/upload" component={components.Upload} />
   	</Route>
 )

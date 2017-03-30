@@ -23,6 +23,7 @@ import Regist from './Regist'
 import Slider from './Slider'
 import List from './List'
 import Upload from './Upload'
+import Content from './Content'
 
 export default {
 	Head,
@@ -49,5 +50,6 @@ export default {
 	Regist,
 	Slider,
 	List,
-	Upload
+	Upload,
+	Content
 }

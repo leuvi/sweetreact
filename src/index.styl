@@ -854,11 +854,31 @@ $logoBase(rotate = 0, top = -2px)
 			width 0
 			transition width .1s
 			border-radius 10px
-			background-color $baseColor
+			background-color $btnColor
 	circle
 		transition stroke-dasharray .1s
 		
 /*citypicker*/
+.citycont
+	display flex
+	height 3rem
+	margin-bottom 15px
+	li
+		border-bottom 1px solid $borderColor
+		font-size .8rem
+		&:first-child, &:last-child
+			flex-grow 1
+		&:nth-child(2)
+			flex-basis 60px
+			border-bottom none
+			$center()
+			.iconfont
+				font-size 1.2rem
+				color $baseColor
+		span
+			color $grayColor
+			font-size .6rem
+			
 .citybox
 	position absolute
 	left 0
@@ -1153,6 +1173,9 @@ $clearinput()
 .listdemo
 	line-height 2.8rem
 	padding-left 20px
+	h2
+		font-size .7rem
+		font-weight 300
 .listview-outer
 	width 100%
 	height calc(100vh - 44px)

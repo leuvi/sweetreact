@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Layout from './Layout'
 import SweetAnimate from './SweetAnimate'
 import Code from './Code'
+import {ToastBox} from './Toast'
 
 export default class Upload extends Component {
 	constructor(props) {
@@ -45,7 +46,7 @@ export default class Upload extends Component {
 		this.setState({
 			upload: {
 				show: true,
-				length: 9,
+				length: 3,
 				size: 1024,
 				callback: this.callback.bind(this)
 			}
@@ -77,7 +78,10 @@ class UploadBox extends Component {
 			piclist: [],
 			msg: '',
 			showDelete: false,
-			disabled: true
+			disabled: true,
+			toast: {
+				show: false
+			}
 		}
 	}
 	componentWillReceiveProps(nextProps) {
@@ -115,6 +119,7 @@ class UploadBox extends Component {
 						</ul>
 					</div>
 				</div>
+				<ToastBox {...this.state.toast} hidden={this.hiddenToast.bind(this)} />
 			</div> : null
 		return (
 			<SweetAnimate
@@ -167,7 +172,14 @@ class UploadBox extends Component {
 	}
 	fileChange(e) {
 		if(this.state.piclist.length === this.props.length) {
-			alert('最多只能上传' + this.props.length + '张~')
+			this.setState({
+				toast: {
+					show: true,
+					type: 3,
+					text: '最多只能上传' + this.props.length + '张~',
+					time: 800
+				}
+			})
 			return
 		}
 		const file = e.target.files[0]
@@ -175,11 +187,25 @@ class UploadBox extends Component {
 			return
 		}
 		if(!/image/.test(file.type)) {
-			alert('只能上传图片哦~')
+			this.setState({
+				toast: {
+					show: true,
+					type: 3,
+					text: '只能上传图片哦~',
+					time: 800
+				}
+			})
 			return
 		}
 		if(file.size / 1024 > this.props.size) {
-			alert('图片尺寸太大啦~')
+			this.setState({
+				toast: {
+					show: true,
+					type: 3,
+					text: '图片尺寸太大啦~',
+					time: 800
+				}
+			})
 			return
 		}
 		const $fileData = new FileReader()
@@ -205,6 +231,13 @@ class UploadBox extends Component {
 	toggleDelete() {
 		this.setState({
 			showDelete: !this.state.showDelete
+		})
+	}
+	hiddenToast() {
+		this.setState({
+			toast: {
+				show: false
+			}
 		})
 	}
 }
