@@ -21,13 +21,6 @@ export class CityPickerBox extends Component {
 			})
 		}
     }
-    shouldComponentUpdate(nextProps, nextState) {
-    	//console.log(nextProps.show, nextState.show, this.props.show, this.state.show)
-    	// if(nextProps.show === this.props.show) {
-    	// 	return false
-    	// }
-    	return true
-    }
     componentDidUpdate() {
     	if(this.state.show) {
     		//this.update(this.refs.ul)
@@ -98,7 +91,6 @@ export class CityPickerBox extends Component {
 		const hot = this.cityData ? this.cityData[0].n.map((v, k) => {
 			return <dd key={k} onClick={this.select.bind(this, v.n, v.c)}>{v.n}</dd>
 		}) : null
-
 		const dl = this.cityData ? this.cityData.slice(1).map((v, k) => {
 			return (<dl className="citylist" key={k}>
 				<dt data-tag={v.k}>{v.k}</dt>

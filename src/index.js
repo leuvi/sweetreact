@@ -4,18 +4,32 @@ import {Router, hashHistory} from 'react-router'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import {remLayout} from './util'
 import childRoutes from './routes'
+import store from './store'
 
 import Home from './Home'
-
 import './index.styl'
 
+
 class App extends React.Component {
+	static childContextTypes = {
+		loading: React.PropTypes.func
+	}
 	constructor(props) {
 		super(props)
 		this.state = {
 			slideName: 'swipeLeft',
 			loading: false
 		}
+	}
+	getChildContext() {
+		return {
+			loading: this.hiddenLoading.bind(this)
+		}
+	}
+	hiddenLoading(value) {
+		this.setState({
+			loading: value
+		})
 	}
 	componentWillReceiveProps(nextProps) {
 		let newPath = nextProps.location.pathname
@@ -29,9 +43,22 @@ class App extends React.Component {
 			} else {
 				slideName = 'swipeRight'
 			}
+			store.dispatch({type: 'HIDDEN', display: false})
 			this.setState({slideName}, () => window.scrollTo(0, 0))
 		}
+
 	}
+	shouldComponentUpdate(nextProps) {
+		return nextProps.location.action === 'POP'
+	}
+	componentDidMount() {
+		remLayout()
+		store.subscribe(() => {
+			this.setState({
+				loading: store.getState()
+			})
+		})
+	}	
 	render() {
 		const loading = this.state.loading ? <div className="isloading" onTouchMove={e => e.preventDefault()}>
 			    	<div className="loading"></div>
@@ -55,6 +82,8 @@ class App extends React.Component {
 	}
 }
 
+
+
 const routes = [
 	{
 		path: '/',
@@ -62,7 +91,12 @@ const routes = [
 		indexRoute: {
 			component: Home
 		},
-		childRoutes
+		childRoutes,
+		onChange(prevState, nextState) {
+			if(nextState.location.action === 'PUSH') {
+				store.dispatch({type: 'SHOW', display: true})
+			}
+		}
 	},
 	{
 		path: '*',
@@ -78,4 +112,3 @@ ReactDOM.render(
 	<Router history={hashHistory} routes={routes} />,
 	document.getElementById('app')
 )
-remLayout()

@@ -189,4 +189,7 @@ export default class Demos extends Component {
 			}
 		})
 	}
+	routerWillLeave(nextLocation) {
+		console.log(nextLocation)
+	}
 }

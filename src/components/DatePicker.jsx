@@ -45,7 +45,7 @@ export class DatePickerBox extends Component {
 				</ul>
 				{this.createDom()}
 				{this.props.type === 2 ? this.state.count === 0 
-					? <div className="plytext">请选择去程日期</div> 
+					? <div className="plytext animated shake">请选择去程日期</div> 
 					: <div className="plytext">请选择返程日期</div> 
 					: null}
 			</div>) : null
