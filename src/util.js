@@ -11,6 +11,37 @@ export let remLayout = () => {
 	window.addEventListener('DOMContentLoaded', recalc, !1)
 }
 
+export let activeEffect = () => {
+	function addlink(e) {
+		const target = e.target
+		let link = ''
+		if(target.nodeName === 'A') {
+			link = target
+		} else {
+			link = target.parentNode
+			while (link && link.nodeName !== 'A') {
+				link = link.parentNode
+			}
+		}
+		link && link.classList.add('active')
+	}
+	function removelink(e) {
+		const target = e.target
+		let link = ''
+		if(target.nodeName === 'A') {
+			link = target
+		} else {
+			link = target.parentNode
+			while (link && link.nodeName !== 'A') {
+				link = link.parentNode
+			}
+		}
+		link && link.classList.remove('active')
+	}
+	document.body.addEventListener('touchstart', addlink)
+	document.body.addEventListener('touchend', removelink)
+}
+
 export let getJSON = url => new Promise((resolve, reject) => {
 	let xhr = new XMLHttpRequest()
 	xhr.open('GET', url)

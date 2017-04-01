@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router, hashHistory} from 'react-router'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import {remLayout} from './util'
+import {remLayout, activeEffect} from './util'
 import childRoutes from './routes'
 import store from './store'
 
@@ -53,11 +53,14 @@ class App extends React.Component {
 	}
 	componentDidMount() {
 		remLayout()
+		activeEffect()
+		
 		store.subscribe(() => {
 			this.setState({
 				loading: store.getState()
 			})
 		})
+		
 	}	
 	render() {
 		const loading = this.state.loading ? <div className="isloading" onTouchMove={e => e.preventDefault()}>

@@ -244,11 +244,10 @@ $logoBase(rotate = 0, top = -2px)
 			transition background .2s
 			font-size .8rem
 			a
-				transition color .2s
-			&:active
-				background-color $baseColor
-				color #fff
-				a
+				display block
+				border-radius 5px
+				&.active
+					background-color $baseColor
 					color #fff
 			div
 				padding 20px 15px 20px 20px
