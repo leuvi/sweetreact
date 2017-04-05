@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router, hashHistory} from 'react-router'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import SweetAnimate from './components/SweetAnimate'
 import {remLayout, activeEffect} from './util'
 import childRoutes from './routes'
 import store from './store'
 
-import Home from './Home'
 import './index.styl'
 
 
@@ -17,7 +16,10 @@ class App extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			slideName: 'swipeLeft',
+			slideName: {
+				enter: 'slideInRight',
+				leave: 'slideOutLeft'
+			},
 			loading: false
 		}
 	}
@@ -37,11 +39,20 @@ class App extends React.Component {
 		if(newPath !== oldPath) {
 			let slideName = ''
 			if(oldPath === '/404') {
-				slideName = 'swipeRight'
+				slideName = {
+					enter: 'slideInLeft',
+					leave: 'slideOutRight'
+				}
 			} else if (newPath === '/404' || newPath.length >= oldPath.length) {
-				slideName = 'swipeLeft'
+				slideName = {
+					enter: 'slideInRight',
+					leave: 'slideOutLeft'
+				}
 			} else {
-				slideName = 'swipeRight'
+				slideName = {
+					enter: 'slideInLeft',
+					leave: 'slideOutRight'
+				}
 			}
 			store.dispatch({type: 'HIDDEN', display: false})
 			this.setState({slideName}, () => window.scrollTo(0, 0))
@@ -53,6 +64,8 @@ class App extends React.Component {
 	}
 	componentDidMount() {
 		remLayout()
+
+		//开启点击响应效果
 		activeEffect()
 		
 		store.subscribe(() => {
@@ -67,19 +80,21 @@ class App extends React.Component {
 			    	<div className="loading"></div>
 			    	<p>正在加载</p>
 			    </div> : null
+		const {enter, leave} = this.state.slideName
 		return (
 			<div className="app">
 				{loading}
-				<ReactCSSTransitionGroup
-			      component="div"
-			      transitionName={this.state.slideName}
-			      transitionEnterTimeout={500}
-			      transitionLeaveTimeout={500}
-			    >
-			      {React.cloneElement(this.props.children, {
-			        key: this.props.location.pathname
-			      })}
-			    </ReactCSSTransitionGroup>
+			    <SweetAnimate
+					component="span"
+				    enter={enter}
+				    leave={leave}
+				    durationEnter={500}
+				    durationLeave={500}
+				>
+				    {React.cloneElement(this.props.children, {
+				        key: this.props.location.pathname
+				    })}
+				</SweetAnimate>
 			</div>	
 		)
 	}
@@ -92,7 +107,7 @@ const routes = [
 		path: '/',
 		component: App,
 		indexRoute: {
-			component: Home
+			component: require('./Home.jsx')
 		},
 		childRoutes,
 		onChange(prevState, nextState) {

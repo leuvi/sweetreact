@@ -298,6 +298,7 @@ $logoBase(rotate = 0, top = -2px)
 /*demos*/
 .demos
 	width 100%
+	padding-top 10px
 	ul
 		display flex
 		flex-wrap wrap
@@ -309,27 +310,26 @@ $logoBase(rotate = 0, top = -2px)
 			border-bottom 1px solid $borderColor
 			border-right 1px solid $borderColor
 			box-sizing border-box
-			transition background .2s
-			&:active
-				background-color #ededed
-				a
-					transform scale(1.5)
 			&:nth-child(4n)
 				border-right none
 			a
-				display block
 				width 100%
 				height @width
 				$center()
-				transition all .2s
+				background-color #fff
 				flex-direction column
+				&.active
+					background-color $baseColor
+					color #fff
+					i
+						color #fff
 				span
 					font-size .6rem
 					i
 						font-size 1.1rem
-						color $baseColor
 					&:last-child
 						margin-top: .3rem
+					
 			&.disabled
 				a
 					color $grayColor

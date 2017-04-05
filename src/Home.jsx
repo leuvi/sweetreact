@@ -4,7 +4,7 @@ import {Link} from 'react-router'
 import Logo from './Logo'
 
 
-export default class App extends Component {
+class Home extends Component {
 	render() {
 		return (
 			<Layout name="welcome.!" back={false}>
@@ -43,6 +43,8 @@ export default class App extends Component {
 		)
 	}
 }
+
+module.exports = Home
 
 // function Logo() {
 // 	return (
