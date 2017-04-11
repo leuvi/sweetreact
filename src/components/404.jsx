@@ -6,7 +6,7 @@ export default class extends Component {
 		return (
 			<Layout name="404">
 				<div className="errorpage">
-					<div className="e404">404</div>
+					<div className="e404">NOT FOUND</div>
 				</div>
 			</Layout>
 		)

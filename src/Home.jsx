@@ -10,7 +10,7 @@ class Home extends Component {
 			<Layout name="welcome.!" back={false}>
 				<div className="home">
 					<Logo />
-					<h2>Create By ReactJS & Stylus<span>Beta</span></h2>
+					<h2>Based on React development</h2>
 					<ul>
 						<li>
 							<Link to="/demos">

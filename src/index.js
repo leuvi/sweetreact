@@ -10,9 +10,6 @@ import './index.styl'
 
 
 class App extends React.Component {
-	static childContextTypes = {
-		loading: React.PropTypes.func
-	}
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -22,16 +19,6 @@ class App extends React.Component {
 			},
 			loading: false
 		}
-	}
-	getChildContext() {
-		return {
-			loading: this.hiddenLoading.bind(this)
-		}
-	}
-	hiddenLoading(value) {
-		this.setState({
-			loading: value
-		})
 	}
 	componentWillReceiveProps(nextProps) {
 		let newPath = nextProps.location.pathname

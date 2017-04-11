@@ -4,7 +4,7 @@ import SweetAnimate from './SweetAnimate'
 import {timeFormat, time2md, time2w, timeStamp} from '../util'
 import {TabBox} from './Tab'
 import {ToastBox} from './Toast'
-
+import calendar from '../plugins/calendar'
 
 export class DatePickerBox extends Component {
 	monthArr = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -60,23 +60,39 @@ export class DatePickerBox extends Component {
 			</SweetAnimate>
 		)
 	}
+	getLunarCalendar() {
+		const days = {}
+		const holidays = {
+			'1-1': '春节',
+			'12-30': '除夕',
+			'1-15': '元宵节',
+			'5-5': '端午节',
+			'7-7': '七夕节',
+			'8-15': '中秋节'
+		}
+		const year = +this.props.now.substr(0, 4)
+		
+		for(let i in holidays) {
+			if(holidays.hasOwnProperty(i)) {
+				const md = i.split('-')
+				if(timeStamp(this.props.now) < timeStamp(year + '-' + i)) {
+					const day = calendar.lunar2solar(year, +md[0], +md[1])
+					days[`${day.cMonth}-${day.cDay}`] = holidays[i]
+				} else {
+					const day = calendar.lunar2solar(year + 1, +md[0], +md[1])
+					days[`${day.cMonth}-${day.cDay}`] = holidays[i]
+				}
+			}
+		}
+		//console.log(days)
+		return days
+	}
 	createDom() {
 		const date = this.props.now.split('-')
 		this.year = parseInt(date[0], 10)
 		this.month = parseInt(date[1], 10)
 		this.day = parseInt(date[2], 10)
 		this.months = this.props.months + 1 || 7
-
-		const months = [...Array(this.months)].map((v, k) => {
-			const year = this.month + k > 12 ? this.year + 1 : this.year
-			const month = this.month + k > 12 ? this.month + k - 12 : this.month + k
-			return <div key={k}>{this.createMonth(year, month)}</div>
-		})
-		return <div className="monthlist">{months}</div>
-	}
-	createMonth(year, month) {
-		year = parseInt(year, 10)
-		month = parseInt(month, 10)
 
 		const specialDay = Object.assign({
 			'10-1': '国庆节',
@@ -87,7 +103,18 @@ export class DatePickerBox extends Component {
 			'2-14': '情人节',
 			'3-8': '妇女节',
 			'6-1': '儿童节',
-		}, this.props.specialDay)
+		}, this.getLunarCalendar(), this.props.specialDay)
+
+		const months = [...Array(this.months)].map((v, k) => {
+			const year = this.month + k > 12 ? this.year + 1 : this.year
+			const month = this.month + k > 12 ? this.month + k - 12 : this.month + k
+			return <div key={k}>{this.createMonth(year, month, specialDay)}</div>
+		})
+		return <div className="monthlist">{months}</div>
+	}
+	createMonth(year, month, specialDay) {
+		year = parseInt(year, 10)
+		month = parseInt(month, 10)
 
 		const dayLength = this.isLeap(year) && month === 2 ? this.monthArr[month - 1] + 1 : this.monthArr[month - 1]
 		const emptyLi = [...Array(new Date(year, month - 1, 1).getDay())]

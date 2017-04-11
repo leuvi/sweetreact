@@ -93,3 +93,14 @@ export let timeStamp = str => {
 	const day = +arr[2]
 	return new Date(year, month - 1, day).getTime()
 }
+
+
+//对象代理
+export function _dataProxy(object, key) {
+	Object.defineProperty(object, key, {
+		configurable: true,
+		enumerable: true,
+		get: () => object.data[key],
+		set: val => object.data[key] = val
+	})
+}
