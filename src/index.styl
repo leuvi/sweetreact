@@ -84,6 +84,8 @@ body
 	margin 0 15px 15px 0
 .line
 	height 20px
+.btnouter
+	padding 20px 15px
 .abtn
 	color #fff
 	background $btnColor
@@ -1361,6 +1363,29 @@ $clearinput()
 						width 45%
 						height 3px
 						background #ddd
+						
+
+.select
+	width 100%
+	background-color #fff
+	h2
+		border-bottom 1px solid $borderColor
+		line-height 1.5rem
+		font-size .6rem
+		text-indent 15px
+	li
+		line-height 1.6rem
+		border-bottom 1px solid $borderColor
+		color #666
+		margin-left 15px
+		span
+			margin-left 10px
+		.iconfont
+			font-size .8rem
+			vertical-align middle
+		&.selected
+			color $baseColor
+
 
 @media only screen and (max-width: 414px)
 	.upload .pics ul li

@@ -208,6 +208,14 @@ export default [
 		}
 	},
 	{
+		path: '/demo/select',
+		getComponent: (location, callback) => {
+			require.ensure([], require => {
+				callback(null, require('./components/Select.jsx').default)
+			})
+		}
+	},
+	{
 		path: '/demo/list/:id',
 		getComponent: (location, callback) => {
 			require.ensure([], require => {

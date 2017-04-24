@@ -12,12 +12,6 @@ export default class Demos extends Component {
 			}
 		}
 	}
-	componentWillReceiveProps(nextProps) {
-		//console.log(nextProps)
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-		return true
-    }
 	render() {
 		return (
 			<Layout name="Demo Previews" right={{icon: 'pinglun', callback: this.showTip.bind(this)}}>
@@ -155,16 +149,17 @@ export default class Demos extends Component {
 								<span>Upload</span>
 							</Link>
 						</li>
+						<li>
+							<Link to="/demo/select">
+								<span><i className="iconfont icon-radiobutton2"></i></span>
+								<span>Select</span>
+							</Link>
+						</li>
 						<li className="disabled">
 							<Link to="/demo/form">
 								<span><i className="iconfont icon-ziyouanpai"></i></span>
 								<span>Form</span>
 							</Link>
-						</li>
-						<li className="disabled">
-							<a>
-								<span>未完待续</span>
-							</a>
 						</li>
 					</ul>
 					<DialogBox {...this.state.dialog} hidden={this.hidden.bind(this)} />
