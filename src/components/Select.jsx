@@ -1,13 +1,17 @@
 import React, {Component} from 'react'
 import Layout from './Layout'
 import Des from './Des'
+import {DialogBox} from './Dialog'
 
 export default class Select extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			tea: '',
-			skin: []
+			skin: [],
+			dialog: {
+				show: false
+			}
 		}
 	}
 	componentWillMount() {
@@ -37,6 +41,7 @@ export default class Select extends Component {
 				<div className="btnouter">
 					<div className="abtn" onClick={this.submit.bind(this)}>提 交</div>
 				</div>
+				<DialogBox {...this.state.dialog} hidden={this.hidden.bind(this)} />
 			</Layout>
 		)
 	}
@@ -50,12 +55,26 @@ export default class Select extends Component {
 			skin: item
 		})
 	}
+	hidden() {
+		this.setState({
+			dialog: {
+				show: false
+			}
+		})
+	}
 	submit() {
 		const data = {
 			tea: this.state.tea,
 			skin: this.state.skin
 		}
-		alert(JSON.stringify(data))
+		this.setState({
+			dialog: {
+				show: true,
+				title: '提交的数据',
+				content: JSON.stringify(data),
+				confirmText: '好的~'
+			}
+		})
 	}
 }
 

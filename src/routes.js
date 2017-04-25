@@ -216,6 +216,14 @@ export default [
 		}
 	},
 	{
+		path: '/demo/indicator',
+		getComponent: (location, callback) => {
+			require.ensure([], require => {
+				callback(null, require('./components/Indicator.jsx').default)
+			})
+		}
+	},
+	{
 		path: '/demo/list/:id',
 		getComponent: (location, callback) => {
 			require.ensure([], require => {

@@ -1376,7 +1376,7 @@ $clearinput()
 	li
 		line-height 1.6rem
 		border-bottom 1px solid $borderColor
-		color #666
+		color #999
 		margin-left 15px
 		span
 			margin-left 10px
@@ -1385,7 +1385,35 @@ $clearinput()
 			vertical-align middle
 		&.selected
 			color $baseColor
+		&:last-child
+			border-bottom none
 
+.indicatordemo
+	margin-top 15px
+	background-color #fff
+	ul
+		display flex
+		flex-wrap wrap
+		li
+			width 4rem
+			height @width
+			border-right 1px solid $borderColor
+			border-bottom 1px solid $borderColor
+			box-sizing border-box
+			$center()
+			flex-direction column
+			&:nth-child(4n)
+				border-right none
+			h3
+				font-size .6rem
+				margin-bottom 10px
+.indicator
+	stroke #333
+	fill #333
+	vertical-align middle
+	display inline-block
+	width 1rem
+	height 1rem
 
 @media only screen and (max-width: 414px)
 	.upload .pics ul li

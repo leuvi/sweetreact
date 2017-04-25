@@ -81,14 +81,14 @@ export default class CountDown extends Component {
 	}
 	render() {
 		const codes = `<CountDownBox 
-	endtime="2017-05-01 00:00:00" 
+	endtime="2017-10-01 00:00:00" 
 	callback={倒计时完成回调函数} 
 />`
 		return (
 			<Layout name="CountDown">
-				<Des info="距离51劳动节还有" />
+				<Des info="距离国庆节还有" />
 				<div className="demoarea">
-					<CountDownBox endtime="2017-05-01 00:00:00" callback={this.timeEnd.bind(this)} />
+					<CountDownBox endtime="2017-10-01 00:00:00" callback={this.timeEnd.bind(this)} />
 					<div className="line"></div>
 					<Code codes={codes} />
 					<DialogBox {...this.state.infos} />
