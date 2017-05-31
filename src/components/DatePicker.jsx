@@ -67,24 +67,37 @@ export class DatePickerBox extends Component {
 			'12-30': '除夕',
 			'1-15': '元宵节',
 			'5-5': '端午节',
-			'7-7': '七夕节',
-			'8-15': '中秋节'
+			'7-7': '七夕',
+			'8-15': '中秋节',
+			'9-9': '重阳节',
+			'12-8': '腊八节',
+			'12-23': '小年'
 		}
 		const year = +this.props.now.substr(0, 4)
 		
-		for(let i in holidays) {
-			if(holidays.hasOwnProperty(i)) {
-				const md = i.split('-')
-				if(timeStamp(this.props.now) < timeStamp(year + '-' + i)) {
-					const day = calendar.lunar2solar(year, +md[0], +md[1])
-					days[`${day.cMonth}-${day.cDay}`] = holidays[i]
-				} else {
-					const day = calendar.lunar2solar(year + 1, +md[0], +md[1])
-					days[`${day.cMonth}-${day.cDay}`] = holidays[i]
+		for(let y = 0; y < 2; y++) {
+			for(let date in holidays) {
+				if(holidays.hasOwnProperty(date)) {
+					const md = date.split('-')
+					const day = calendar.lunar2solar(year + y, +md[0], +md[1])
+					days[`${day.cYear}-${day.cMonth}-${day.cDay}`] = holidays[date]
 				}
 			}
 		}
+		
 		//console.log(days)
+		return days
+	}
+	addYear(holidays) {
+		const days = {}
+		const year = +this.props.now.substr(0, 4)
+		for(let y = 0; y < 2; y++) {
+			for(let date in holidays) {
+				if(holidays.hasOwnProperty(date)) {
+					days[`${year + y}-${date}`] = holidays[date]
+				}
+			}
+		}
 		return days
 	}
 	createDom() {
@@ -93,8 +106,8 @@ export class DatePickerBox extends Component {
 		this.month = parseInt(date[1], 10)
 		this.day = parseInt(date[2], 10)
 		this.months = this.props.months + 1 || 7
-
-		const specialDay = Object.assign({
+		
+		const holidays = {
 			'10-1': '国庆节',
 			'5-1': '劳动节',
 			'12-24': '平安夜',
@@ -103,7 +116,8 @@ export class DatePickerBox extends Component {
 			'2-14': '情人节',
 			'3-8': '妇女节',
 			'6-1': '儿童节',
-		}, this.getLunarCalendar(), this.props.specialDay)
+		}
+		const specialDay = Object.assign({}, this.addYear(holidays), this.getLunarCalendar(), this.props.specialDay)
 
 		const months = [...Array(this.months)].map((v, k) => {
 			const year = this.month + k > 12 ? this.year + 1 : this.year
@@ -120,7 +134,7 @@ export class DatePickerBox extends Component {
 		const emptyLi = [...Array(new Date(year, month - 1, 1).getDay())]
 						.map((v, k) => <li key={k}></li>)
 		const dayLi = [...Array(dayLength)].map((v, k) => {
-			const day = month + '-' + (k + 1)
+			const day = year + '-' + month + '-' + (k + 1)
 			const sday = day in specialDay ? <em>{specialDay[day]}</em> : null
 			const thisDate = this.date2Str(year, month, k + 1)
 			const isStartDay = this.state.start === thisDate
