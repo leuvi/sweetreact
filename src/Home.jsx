@@ -2,9 +2,16 @@ import React, { Component } from 'react'
 import Layout from './components/Layout'
 import {Link} from 'react-router'
 import Logo from './Logo'
+import wavesButton from './plugins/wavesButton'
 
 
 class Home extends Component {
+	componentDidMount() {
+		//波浪按钮
+		;[...document.querySelectorAll('li')].forEach(li => {
+			new wavesButton(li, '#ff348b')
+		})
+	}
 	render() {
 		return (
 			<Layout name="welcome.!" back={false}>

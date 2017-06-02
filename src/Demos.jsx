@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Layout from './components/Layout'
 import {Link} from 'react-router'
 import {DialogBox} from './components/Dialog'
+import wavesButton from './plugins/wavesButton'
 
 export default class Demos extends Component {
 	constructor(props) {
@@ -11,6 +12,12 @@ export default class Demos extends Component {
 				show: false
 			}
 		}
+	}
+	componentDidMount() {
+		//波浪按钮
+		;[...document.querySelectorAll('li')].forEach(li => {
+			new wavesButton(li, '#ff348b')
+		})
 	}
 	render() {
 		return (

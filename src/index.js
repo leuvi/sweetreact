@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router, hashHistory} from 'react-router'
 import SweetAnimate from './components/SweetAnimate'
-import {remLayout, activeEffect} from './util'
+import {remLayout} from './util'
 import childRoutes from './routes'
 import store from './store'
 
@@ -50,10 +50,12 @@ class App extends React.Component {
 		return nextProps.location.action === 'POP'
 	}
 	componentDidMount() {
+		
+		//rem自适应
 		remLayout()
 
 		//开启点击响应效果
-		activeEffect()
+		//activeEffect()
 		
 		store.subscribe(() => {
 			this.setState({
