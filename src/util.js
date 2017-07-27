@@ -68,6 +68,10 @@ export let timeFormat = (time, item = 'y-m-d') => {
 		? tf(t.getMonth() + 1) : tf(t.getDate()))
 }
 
+export let timeNow = (time) => {
+	return `${time.getHours()}时${time.getMinutes()}分${time.getSeconds()}秒`
+}
+
 export let time2md = time => {
 	const arr = time.split('-')
 	const month = parseInt(arr[1], 10)
@@ -94,6 +98,33 @@ export let timeStamp = str => {
 	return new Date(year, month - 1, day).getTime()
 }
 
+//身份证验证算法
+export let checkId = str => {
+	//加权因子
+	const powers = ["7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7", "9", "10", "5", "8", "4", "2"]
+	//校验码
+	const parityBit = ["1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"]
+	
+	if((typeof str !== 'string' && 
+		typeof str !== 'number') || 
+		(str + '').length !== 18 ||
+		isNaN(str.substr(0, 17))) {
+		console.warn('参数错误')
+		return false
+	}
+	const _str = str + ''
+	const num = _str.substr(0, 17)
+	const lastBit = _str.substr(17).toUpperCase()
+	let sum = 0
+	for(let i = 0; i < 17; i++) {
+		sum += parseInt(num.charAt(i), 10) * parseInt(powers[i], 10)	
+	}
+	if(parityBit[sum % 11] !== lastBit) {
+		return false
+	}
+	return true
+}
+
 
 //对象代理
 export function _dataProxy(object, key) {
@@ -103,4 +134,19 @@ export function _dataProxy(object, key) {
 		get: () => object.data[key],
 		set: val => object.data[key] = val
 	})
+}
+
+//操作日志
+export function log(type, callback) {
+	return function(target, name, descriptor) {
+		const fn = descriptor.value
+		return {
+			...descriptor,
+			value() {
+				console.log(`%c${timeNow(new Date())} %c执行了${type}操作`, 'color: red', 'color: #333')
+				if(callback) callback()
+				return fn.apply(this, arguments)
+			}
+		}
+	}
 }

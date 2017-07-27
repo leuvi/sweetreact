@@ -24,6 +24,7 @@ import Slider from './Slider'
 import List from './List'
 import Upload from './Upload'
 import Content from './Content'
+import ImageShow from './ImageShow'
 
 export default {
 	Head,
@@ -51,5 +52,6 @@ export default {
 	Slider,
 	List,
 	Upload,
-	Content
+	Content,
+	ImageShow
 }

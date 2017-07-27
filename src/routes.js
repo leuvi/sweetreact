@@ -230,5 +230,13 @@ export default [
 				callback(null, require('./components/Content.jsx').default)
 			})
 		}
+	},
+	{
+		path: '/demo/fullslide',
+		getComponent: (location, callback) => {
+			require.ensure([], require => {
+				callback(null, require('./components/ImageShow.jsx').default)
+			})
+		}
 	}
 ]

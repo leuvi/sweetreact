@@ -168,7 +168,13 @@ export default class Demos extends Component {
 								<span>Indicator</span>
 							</Link>
 						</li>
-						<li className="disabled" style={{display: 'none'}}>
+						<li>
+							<Link to="/demo/fullslide">
+								<span><i className="iconfont icon-haoping"></i></span>
+								<span>FullSlide</span>
+							</Link>
+						</li>
+						<li className="disabled">
 							<Link to="/demo/form">
 								<span><i className="iconfont icon-ziyouanpai"></i></span>
 								<span>Form</span>

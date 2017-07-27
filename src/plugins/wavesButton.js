@@ -5,7 +5,6 @@ export default class wavesButton {
 		this.size = 2 * Math.max(parseInt(this.elem.clientWidth, 10), parseInt(this.elem.clientHeight, 10))
 		this.elem.style.position = 'relative'
 		this.elem.style.overflow = 'hidden'
-		
 		this.init()
 	}
 
@@ -27,7 +26,7 @@ export default class wavesButton {
 			position: absolute;
 			border-radius: 50%;
 			background-color: ${this.color};
-			opacity: .5;
+			opacity: .9;
 			will-change: opacity, transform;
 			transform: scale(0);
 			left: -${this.size / 2 - offsetX}px;

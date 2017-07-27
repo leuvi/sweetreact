@@ -8,7 +8,7 @@ import wavesButton from './plugins/wavesButton'
 class Home extends Component {
 	componentDidMount() {
 		//波浪按钮
-		;[...document.querySelectorAll('li')].forEach(li => {
+		;[...document.querySelectorAll('.home li')].forEach(li => {
 			new wavesButton(li, '#ff348b')
 		})
 	}
@@ -51,14 +51,5 @@ class Home extends Component {
 	}
 }
 
-module.exports = Home
 
-// function Logo() {
-// 	return (
-// 		<div className="logo">
-// 			<div className="border">
-// 				<span className="circle"><i className="iconfont icon-xiangqufill"></i></span>
-// 			</div>
-// 		</div>
-// 	)
-// }
+module.exports = Home
