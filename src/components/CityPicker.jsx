@@ -4,6 +4,7 @@ import SweetAnimate from './SweetAnimate'
 import {TabBox} from './Tab'
 import {ToastBox} from './Toast'
 import citydata from '../plugins/citydata'
+import {debounce} from '../decorator'
 
 export class CityPickerBox extends Component {
 	constructor(props) {
@@ -23,7 +24,7 @@ export class CityPickerBox extends Component {
     }
     componentDidUpdate() {
     	if(this.state.show) {
-    		//this.update(this.refs.ul)
+    		this.update(this.refs.ul)
     	}
     }
     componentWillMount() {
@@ -38,6 +39,7 @@ export class CityPickerBox extends Component {
 		this.find(e.target, key)
 		setTimeout(() => this.setState({tagshow: false}), 300)
 	}
+	@debounce(10, true)
 	touchNavMove(e) {
 		let x = e.touches[0].pageX
 		let y = e.touches[0].pageY
@@ -49,6 +51,7 @@ export class CityPickerBox extends Component {
 				this.find(target, key)
 			}
 		}
+		e.preventDefault()
 	}
 	find(elem, key) {
 		elem.parentNode.parentNode.querySelector(`[data-tag=${key}]`).scrollIntoView()
@@ -118,8 +121,8 @@ export class CityPickerBox extends Component {
 						{dl}
 					</div>
 					<ul className="citynav" 
-						//onTouchMove={this.touchNavMove.bind(this)}
-						//onTouchEnd={this.touchNavEnd.bind(this)} 
+						onTouchMove={this.touchNavMove.bind(this)}
+						onTouchEnd={this.touchNavEnd.bind(this)} 
 						ref="ul"
 					>
 						{li}

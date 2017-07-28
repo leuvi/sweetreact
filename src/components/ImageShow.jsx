@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Layout from './Layout'
 import FullSlide from './FullSlide'
-import {log} from '../util'
+import {log, time} from '../decorator'
 
 export default class extends Component {
 	render() {
@@ -60,7 +60,8 @@ class ImgBlock extends Component {
 			</div>
 		)
 	}
-	@log('openFullSlide')
+	@time
+	@log
 	openFullSlide(cur) {
 		this.setState({
 			show: true,

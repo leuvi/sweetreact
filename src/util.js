@@ -68,10 +68,6 @@ export let timeFormat = (time, item = 'y-m-d') => {
 		? tf(t.getMonth() + 1) : tf(t.getDate()))
 }
 
-export let timeNow = (time) => {
-	return `${time.getHours()}时${time.getMinutes()}分${time.getSeconds()}秒`
-}
-
 export let time2md = time => {
 	const arr = time.split('-')
 	const month = parseInt(arr[1], 10)
@@ -134,19 +130,4 @@ export function _dataProxy(object, key) {
 		get: () => object.data[key],
 		set: val => object.data[key] = val
 	})
-}
-
-//操作日志
-export function log(type, callback) {
-	return function(target, name, descriptor) {
-		const fn = descriptor.value
-		return {
-			...descriptor,
-			value() {
-				console.log(`%c${timeNow(new Date())} %c执行了${type}操作`, 'color: red', 'color: #333')
-				if(callback) callback()
-				return fn.apply(this, arguments)
-			}
-		}
-	}
 }
