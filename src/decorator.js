@@ -1,5 +1,8 @@
 export let timeNow = (time) => {
-	return `${time.getHours()}时${time.getMinutes()}分${time.getSeconds()}秒`
+	const hours = time.getHours() > 9 ? time.getHours() : '0' + time.getHours()
+	const minutes = time.getMinutes() > 9 ? time.getMinutes() : '0' + time.getMinutes()
+	const seconds = time.getSeconds() > 9 ? time.getSeconds() : '0' + time.getSeconds()
+	return `${hours}时${minutes}分${seconds}秒`
 }
 
 //操作日志

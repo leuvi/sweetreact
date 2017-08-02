@@ -320,7 +320,7 @@ $logoBase(rotate = 0, top = -2px)
 				$center()
 				background-color #fff
 				flex-direction column
-				&.active
+				&:active
 					background-color $baseColor
 					color #fff
 					i
@@ -1476,6 +1476,18 @@ $clearinput()
 	display inline-block
 	width 1rem
 	height 1rem
+	
+.marqueebox
+	padding 0 .6rem
+	height 1.5rem
+	overflow hidden
+	background #fff
+	li
+		height 1.5rem
+		line-height @height
+	// for li in 1..10
+	// 	li:nth-child({li})
+	// 		background-color #ff5823 + 20% * li
 
 @media only screen and (max-width: 414px)
 	.upload .pics ul li

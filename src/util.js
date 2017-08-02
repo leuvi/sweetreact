@@ -131,3 +131,8 @@ export function _dataProxy(object, key) {
 		set: val => object.data[key] = val
 	})
 }
+
+//随机颜色
+export function randomColor() {
+	return `#${Math.floor(Math.random() * 0xffffff).toString(16)}`
+}
