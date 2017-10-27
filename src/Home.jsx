@@ -3,6 +3,7 @@ import Layout from './components/Layout'
 import {Link} from 'react-router'
 import Logo from './Logo'
 import wavesButton from './plugins/wavesButton'
+import WaveLogo from './components/waveLogo'
 
 
 class Home extends Component {
@@ -45,7 +46,10 @@ class Home extends Component {
 						</li>
 					</ul>
 				</div>
-				<footer>©{new Date().getFullYear()} 苹果熊</footer>
+				<footer>
+					<WaveLogo />
+					<p>©{new Date().getFullYear()} 苹果熊</p>
+				</footer>
 			</Layout>
 		)
 	}

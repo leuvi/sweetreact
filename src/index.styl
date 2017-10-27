@@ -162,8 +162,10 @@ pre
 footer
 		width 100%
 		text-align center
-		padding 40px 0 30px
+		padding 30px 0
 		color $grayColor
+		p
+			margin-top .5rem
 
 
 /*logo*/
@@ -269,6 +271,38 @@ $logoBase(rotate = 0, top = -2px)
 	to
 		transform rotate(360deg)
 
+/*wavelogo*/
+.wavelogo
+	width 1.6rem
+	height @width
+	margin 0 auto
+	border-radius 50%
+	overflow hidden
+	background-color $baseColor
+	//transform scale(1)
+	//border .5px solid #00c6ff
+	.inner
+		position relative
+		width 1.6rem
+		height @width
+		&:before,&:after
+			content ''
+			position absolute
+			left -150%
+			top -330%
+			width 400%
+			height @width
+			background #f6f6f6
+			animation wmove 4s linear infinite
+		&:before
+			border-radius 46%
+		&:after
+			border-radius 43%
+			opacity .5
+@keyframes wmove
+	to
+		transform rotate(360deg)
+		
 /*contact*/
 .contact
 	.cont

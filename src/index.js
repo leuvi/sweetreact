@@ -41,13 +41,17 @@ class App extends React.Component {
 					leave: 'slideOutRight'
 				}
 			}
-			store.dispatch({type: 'HIDDEN', display: false})
+			store.loading.dispatch({type: 'HIDDEN', display: false})
 			this.setState({slideName}, () => window.scrollTo(0, 0))
 		}
 
 	}
 	shouldComponentUpdate(nextProps) {
 		return nextProps.location.action === 'POP'
+	}
+	componentDidUpdate(prevProps) {
+		//let path = this.props.location.pathname
+		//window.scrollTo(0, store.scrollbar.getState()[path])
 	}
 	componentDidMount() {
 		
@@ -57,12 +61,18 @@ class App extends React.Component {
 		//开启点击响应效果
 		//activeEffect()
 		
-		store.subscribe(() => {
+		store.loading.subscribe(() => {
 			this.setState({
-				loading: store.getState()
+				loading: store.loading.getState()
 			})
 		})
 		
+		// window.addEventListener('scroll', () => {
+		// 	store.scrollbar.dispatch({
+		// 		type: this.props.location.pathname,
+		// 		pos: window.pageYOffset
+		// 	})
+		// })
 	}	
 	render() {
 		const loading = this.state.loading ? <div className="isloading" onTouchMove={e => e.preventDefault()}>
@@ -101,7 +111,7 @@ const routes = [
 		childRoutes,
 		onChange(prevState, nextState) {
 			if(nextState.location.action === 'PUSH') {
-				store.dispatch({type: 'SHOW', display: true})
+				store.loading.dispatch({type: 'SHOW', display: true})
 			}
 		}
 	},

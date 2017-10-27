@@ -5,6 +5,38 @@ export let timeNow = (time) => {
 	return `${hours}时${minutes}分${seconds}秒`
 }
 
+//自动绑定
+export function autoBind(target, name, descriptor) {
+	let fn = descriptor.value
+	let defineProperty = false
+
+	return {
+		configurable: true,
+		get() {
+			if(defineProperty 
+				|| this === target.prototype 
+				|| this.hasOwnProperty(name)
+				|| typeof fn !== 'function') {
+				return fn
+			}
+			let boundFn = fn.bind(this)
+			defineProperty = true
+			Object.defineProperty(this, name, {
+				configurable: true,
+				get() {
+					return boundFn
+				},
+				set(value) {
+					fn = value
+					delete this[name]
+				}
+			})
+			defineProperty = false
+			return boundFn
+		}
+	}
+}
+
 //操作日志
 export function log(target, name, descriptor) {
 	const fn = descriptor.value
@@ -52,5 +84,17 @@ export function debounce(wait = 300, immediate = false) {
 				}
 			}
 		}
+	}
+}
+
+//克隆
+export function clone(source) {
+	return (target) => {
+		const _prototype = Object.assign({}, target.prototype)
+		const _target = Object.assign({}, target)
+		Object.setPrototypeOf(target.prototype, source.prototype)
+		Object.setPrototypeOf(target, source)
+		Object.assign(target.prototype, _prototype)
+		Object.assign(target, _target)
 	}
 }

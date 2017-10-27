@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Layout from './Layout'
 import Des from './Des'
 import Code from './Code'
-import {log} from '../decorator'
+import {log, autoBind} from '../decorator'
 
 export default class extends Component {
 	render() {
@@ -15,10 +15,7 @@ const codes = `const props = {
 			direction: 'horizontal',
 			data: ['秋夜长殊未央', 
 			'月明白露澄清光', 
-			'层城绮阁遥相望', 
-			'遥相望川无梁',
-			'北风受节南雁翔',
-			'崇兰委质时菊芳'],
+			'层城绮阁遥相望'],
 			speed: 50
 		}
 		const props2 = {
@@ -88,8 +85,8 @@ class TextMarquee extends Component {
 			<div className="marqueebox">
 				<ul 
 					style={ulStyle} 
-					onTouchStart={this.touchStart.bind(this)}
-					onTouchEnd={this.touchEnd.bind(this)}
+					onTouchStart={this.touchStart}
+					onTouchEnd={this.touchEnd}
 				>
 					{lis}{lis}
 				</ul>
@@ -123,10 +120,12 @@ class TextMarquee extends Component {
 		}
 		this.requestId = requestAnimationFrame(this.textMove.bind(this))
 	}
+	@autoBind
 	@log
 	touchStart() {
 		cancelAnimationFrame(this.requestId)
 	}
+	@autoBind
 	touchEnd() {
 		requestAnimationFrame(this.textMove.bind(this))
 	}
