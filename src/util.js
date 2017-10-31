@@ -143,19 +143,19 @@ export function cacheScrollBar(path, cache) {
 }
 
 //数组随机排序
-export function _shuffle(array) {
-	var i = 0
-	var index_arr = []
-	while(true) {
-		if(arr.length == index_arr.length) {
-			break
-		}
-		i = ~~(Math.random() * arr.length)
-		if(index_arr.some(v => v == i)) {
-			continue
-		}
-		index_arr.push(i)
-	}
-	var res = index_arr.map(v => arr[v])
-	return Array.isArray(arr) ? res : res.join('')
-}
+// export function _shuffle(array) {
+// 	var i = 0
+// 	var index_arr = []
+// 	while(true) {
+// 		if(array.length === index_arr.length) {
+// 			break
+// 		}
+// 		i = ~~(Math.random() * array.length)
+// 		if(index_arr.some(v => v === i)) {
+// 			continue
+// 		}
+// 		index_arr.push(i)
+// 	}
+// 	var res = index_arr.map(v => array[v])
+// 	return Array.isArray(array) ? res : res.join('')
+// }
